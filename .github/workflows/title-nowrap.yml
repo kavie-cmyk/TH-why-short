@@ -1,0 +1,32 @@
+name: One-shot hero title nowrap
+on:
+  push:
+    paths:
+      - '.github/workflows/title-nowrap.yml'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Keep Thanh Hoa together in hero title
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = '<span class="hero-main">Hệ sinh thái du lịch thông minh tỉnh Thanh Hóa</span>'
+          new = '<span class="hero-main">Hệ sinh thái du lịch thông minh tỉnh Thanh&nbsp;Hóa</span>'
+          if old not in s:
+              raise SystemExit('Hero title pattern not found')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+      - name: Commit fix and remove one-shot workflow
+        run: |
+          rm .github/workflows/title-nowrap.yml
+          git config user.name 'ChatGPT UI Fix'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html .github/workflows/title-nowrap.yml
+          git commit -m 'Keep Thanh Hóa together in hero title'
+          git push
