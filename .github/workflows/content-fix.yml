@@ -39,59 +39,49 @@ jobs:
               s = s.replace(old, new)
               print(label, n)
 
-          # 1) Problem statement: do not overclaim service usage as generally limited.
           once(
               '<h3>Thời gian lưu trú và mức sử dụng dịch vụ còn hạn chế</h3>',
               '<h3>Giá trị chuyến đi và thời gian lưu trú chưa tương xứng với yêu cầu tăng tổng thu</h3>',
               'issue-1-title')
 
-          # 2) 24/7 belongs to HM2 operation, not to evidence for service-quality problem.
           once(
               '<div class="metric">24/7</div><div class="desc">Các văn bản và thông tin kiểm tra của tỉnh vẫn ghi nhận tình trạng chất lượng dịch vụ chưa đồng đều, vi phạm về giá, nài ép khách và trông giữ xe.',
               '<div class="metric">07/CT‑UBND</div><div class="desc">Các văn bản và thông tin kiểm tra của tỉnh vẫn ghi nhận tình trạng chất lượng dịch vụ chưa đồng đều, vi phạm về giá, nài ép khách và trông giữ xe.',
               'issue-6-evidence')
 
-          # 3) Fragmentation illustration: equipment should map to equipment/data operations, not complaint handling.
           once(
               '<div class="frag">Thiết bị điểm đến<span>Phản ánh không gắn với quy trình xử lý</span></div>',
               '<div class="frag">Thiết bị điểm đến<span>Thiết bị vận hành riêng lẻ, dữ liệu khó tái sử dụng cho điều hành</span></div>',
               'fragment-equipment')
 
-          # 4) Exact locked pillar name.
           all_('Quản lý – điều hành thông minh', 'Quản lý, điều hành thông minh', 'pillar-name', minimum=1)
           all_('quản lý – điều hành, điểm đến, doanh nghiệp và du khách', 'quản lý, điều hành; điểm đến; doanh nghiệp; và du khách', 'pillar-list', minimum=1)
 
-          # 5) HM2 keeps the valid 24/7 operating scope.
           once(
               '<p>Tích hợp dữ liệu, báo cáo – thống kê, kịch bản điều hành, dự báo/cảnh báo, AI và trợ lý ảo.</p>',
               '<p>Tích hợp dữ liệu, báo cáo – thống kê, kịch bản điều hành 24/7, dự báo/cảnh báo, AI và trợ lý ảo.</p>',
               'hm2-24-7')
 
-          # 6) HM6: payment is integrated through licensed payment intermediaries.
           once(
               '<p>Hành trình trước – trong – sau chuyến đi; đặt dịch vụ, thanh toán, phản ánh, tích điểm, mở rộng siêu thị du lịch số.</p>',
               '<p>Hành trình trước – trong – sau chuyến đi; đặt dịch vụ, tích hợp thanh toán qua tổ chức trung gian thanh toán được cấp phép, phản ánh, tích điểm và mở rộng siêu thị du lịch số.</p>',
               'hm6-payment-boundary')
 
-          # 7) HM7: preserve physical-commercial park scope and cross-system human resources.
           once(
               '<p>Không gian trình diễn, trải nghiệm và khai thác các sản phẩm du lịch số; kết hợp đào tạo, bồi dưỡng nhân lực phục vụ vận hành các hạng mục của Đề án.</p>',
               '<p>Không gian vật lý – thương mại để trình diễn, trải nghiệm, sáng tạo và khai thác tài sản, sản phẩm du lịch số; phát triển nhân lực số được triển khai xuyên các hạng mục, gắn với nghiệm thu, chuyển giao và vận hành.</p>',
               'hm7-scope')
 
-          # 8) Finance: operating cost wording and source/funding boundary from 5692.
           once(
               '<div class="opex">Vận hành sau đầu tư: <strong>≈ 20 tỷ đồng/năm</strong> — ngoài tổng mức đầu tư.</div>',
               '<div class="opex">Kinh phí vận hành, duy trì bình quân: <strong>≈ 20 tỷ đồng/năm</strong> sau bàn giao — ngoài tổng mức đầu tư.</div><div class="funding-note">Nguồn kinh phí khoa học và công nghệ, kết hợp huy động xã hội hóa từ doanh nghiệp đối với các cấu phần có khả năng thương mại hóa; trọng tâm xã hội hóa/PPP gồm Công viên du lịch số và Siêu thị du lịch số.</div>',
               'finance-funding')
 
-          # 9) Finance: remove arithmetic aggregate 35–55; keep the two benefit layers separate.
           once(
               '<div class="sc"><div class="label">Tiết kiệm chi phí quản lý và chi phí tuân thủ</div><div class="val">35–55 tỷ/năm</div><p>15–25 + 20–30 tỷ đồng/năm</p></div>',
               '<div class="sc sc-split"><div class="label">Hai nhóm lợi ích chi phí được tính riêng</div><div class="split-metrics"><div><strong>15–25 tỷ/năm</strong><span>Tiết kiệm chi phí quản lý, xúc tiến</span></div><div><strong>20–30 tỷ/năm</strong><span>Giảm chi phí tuân thủ, bán hàng</span></div></div></div>',
               'finance-split-benefits')
 
-          # 10) Supporting UI for the separated finance metrics and funding note.
           marker = '.dial .opex strong{color:white}.scenarios{display:grid;grid-template-columns:1fr 1fr;gap:12px}'
           replacement = '.dial .opex strong{color:white}.funding-note{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);font-size:11.5px;line-height:1.5;color:#a9cfda;position:relative;z-index:1}.scenarios{display:grid;grid-template-columns:1fr 1fr;gap:12px}'
           once(marker, replacement, 'funding-note-css')
@@ -100,13 +90,12 @@ jobs:
           replacement2 = '.sc p{font-size:11px;color:var(--muted);margin:0}.sc-split{grid-column:1/-1}.split-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}.split-metrics>div{padding:10px 12px;border-radius:14px;background:#f6fafb;border:1px solid #e0eaee}.split-metrics strong{display:block;font-size:18px;color:var(--navy);line-height:1.15}.split-metrics span{display:block;margin-top:5px;font-size:10.5px;color:var(--muted);line-height:1.35}.caution{grid-column:1/-1;'
           once(marker2, replacement2, 'split-benefits-css')
 
-          # Content gate: assert corrected facts and reject the content errors fixed in this pass.
           forbidden = [
               'Thời gian lưu trú và mức sử dụng dịch vụ còn hạn chế',
               '<div class="metric">24/7</div><div class="desc">Các văn bản và thông tin kiểm tra',
               'Thiết bị điểm đến<span>Phản ánh không gắn với quy trình xử lý',
               'Quản lý – điều hành thông minh',
-              'đặt dịch vụ, thanh toán, phản ánh',
+              '<p>Hành trình trước – trong – sau chuyến đi; đặt dịch vụ, thanh toán, phản ánh, tích điểm, mở rộng siêu thị du lịch số.</p>',
               'Tiết kiệm chi phí quản lý và chi phí tuân thủ</div><div class="val">35–55 tỷ/năm',
               '15–25 + 20–30 tỷ đồng/năm'
           ]
@@ -122,7 +111,7 @@ jobs:
               'Không gian vật lý – thương mại',
               'phát triển nhân lực số được triển khai xuyên các hạng mục',
               '≈ 20 tỷ đồng/năm</strong> sau bàn giao — ngoài tổng mức đầu tư',
-              'nguồn kinh phí khoa học và công nghệ'.capitalize(),
+              'Nguồn kinh phí khoa học và công nghệ',
               '15–25 tỷ/năm',
               '20–30 tỷ/năm'
           ]
