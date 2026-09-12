@@ -1,0 +1,168 @@
+name: One-shot TH-why-short language QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/language-qa.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  language-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply proposal-author language corrections and gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8-sig')
+
+          def once(old, new, label):
+              global s
+              n = s.count(old)
+              if n != 1:
+                  raise SystemExit(f'{label}: expected 1 match, found {n}')
+              s = s.replace(old, new)
+              print(label, n)
+
+          replacements = [
+          (
+          'Đến năm 2030, Thanh Hóa đặt mục tiêu tăng mạnh cả lượng khách và tổng thu du lịch. Để đạt mục tiêu này, tỉnh cần tăng thời gian lưu trú, mức sử dụng dịch vụ, mở rộng dòng khách tới nhiều khu, điểm du lịch và nâng hiệu quả quản lý trên cơ sở dữ liệu dùng chung.',
+          'Đến năm 2030, Thanh Hóa đặt mục tiêu tăng mạnh cả lượng khách và tổng thu du lịch. Khoảng cách giữa tốc độ tăng lượt khách và tổng thu đặt ra yêu cầu kéo dài thời gian lưu trú, tăng mức sử dụng dịch vụ, mở rộng dòng khách tới nhiều khu, điểm du lịch và nâng hiệu quả quản lý trên cơ sở dữ liệu dùng chung.',
+          'hero-author-voice'),
+          (
+          'Mức chênh lệch này cho thấy tăng số lượng khách là chưa đủ; cần tăng thời gian lưu trú, mức sử dụng dịch vụ và hiệu quả khai thác các khu, điểm du lịch.',
+          'Mức chênh lệch này cho thấy tăng số lượng khách là chưa đủ; yêu cầu trọng tâm là kéo dài thời gian lưu trú, tăng mức sử dụng dịch vụ và nâng hiệu quả khai thác các khu, điểm du lịch.',
+          'why-author-voice'),
+          (
+          'Cần tạo điều kiện để khách ở lâu hơn, sử dụng nhiều dịch vụ hơn, đi đến nhiều khu, điểm du lịch hơn; đồng thời nâng chất lượng phục vụ và sử dụng dữ liệu trong công tác quản lý, điều hành.',
+          'Trọng tâm là tạo điều kiện để khách ở lâu hơn, sử dụng nhiều dịch vụ hơn, đi đến nhiều khu, điểm du lịch hơn; đồng thời nâng chất lượng phục vụ và sử dụng dữ liệu trong công tác quản lý, điều hành.',
+          'callout-author-voice'),
+          ('Cần tăng thời gian lưu trú và mức sử dụng dịch vụ','Kéo dài thời gian lưu trú và tăng mức sử dụng dịch vụ','issue-1-need'),
+          ('Cần tăng kết nối giữa biển, di sản, sinh thái, cộng đồng và đô thị','Tăng liên kết giữa biển, di sản, sinh thái, cộng đồng và đô thị','issue-2-need'),
+          ('Cần gắn tài nguyên với nội dung, sản phẩm, trải nghiệm và dịch vụ','Gắn tài nguyên với nội dung, sản phẩm, trải nghiệm và dịch vụ','issue-3-need'),
+          ('Cần chuẩn hóa thông tin cơ sở cung cấp dịch vụ và tạo điều kiện tham gia thuận tiện','Chuẩn hóa thông tin cơ sở cung cấp dịch vụ và tạo điều kiện tham gia thuận tiện','issue-4-need'),
+          ('Cần tiếp tục làm sạch, chuẩn hóa, kết nối và khai thác dữ liệu dùng chung','Tiếp tục làm sạch, chuẩn hóa, kết nối và khai thác dữ liệu dùng chung','issue-5-need'),
+          ('Cần liên thông tiếp nhận phản ánh, xử lý vi phạm và giám sát chất lượng','Liên thông tiếp nhận phản ánh, xử lý vi phạm và giám sát chất lượng','issue-6-need'),
+          (
+          'Cần tổ chức các hạng mục trên một nền tảng dùng chung',
+          'Các hạng mục được tổ chức trên một nền tảng dùng chung',
+          'section-4-title'),
+          (
+          'Các hạng mục về hạ tầng, dữ liệu, điều hành, ứng dụng và nội dung số cần được triển khai theo cùng kiến trúc, chuẩn dữ liệu và cơ chế kết nối. Nếu tiếp tục đầu tư riêng lẻ, khả năng dùng chung dữ liệu và phối hợp vận hành sẽ bị hạn chế.',
+          'Các hạng mục về hạ tầng, dữ liệu, điều hành, ứng dụng và nội dung số được tổ chức theo cùng kiến trúc, chuẩn dữ liệu và cơ chế kết nối. Cấu trúc này tạo điều kiện dùng chung dữ liệu, phối hợp vận hành và hạn chế đầu tư trùng lặp.',
+          'section-4-dek'),
+          (
+          'Các chỉ tiêu đầu ra được xác định ở quy mô toàn tỉnh và phản ánh năng lực mà bảy hạng mục cùng hình thành, không phải KPI riêng của một hạng mục nếu chức năng có tính liên thông.',
+          'Các chỉ tiêu đầu ra được xác định ở quy mô toàn tỉnh và phản ánh năng lực tổng hợp do bảy hạng mục cùng hình thành; một số chỉ tiêu được tạo ra bởi nhiều hạng mục có chức năng liên thông.',
+          'outputs-author-voice'),
+          ('Các dịch vụ cần được kết nối trong toàn bộ chuyến đi','Hành trình du khách được kết nối xuyên suốt chuyến đi','journey-title'),
+          (
+          'Từ khâu tìm kiếm thông tin, xây dựng hành trình, đặt dịch vụ, tham quan đến thanh toán và phản ánh, du khách cần được tiếp cận thông tin và dịch vụ thống nhất. Dữ liệu phát sinh trong quá trình sử dụng được tổng hợp phục vụ công tác quản lý và cải thiện chất lượng dịch vụ.',
+          'Từ khâu tìm kiếm thông tin, xây dựng hành trình, đặt dịch vụ, tham quan đến thanh toán và phản ánh, hành trình được tổ chức để du khách tiếp cận thông tin và dịch vụ thống nhất. Dữ liệu phát sinh trong quá trình sử dụng được tổng hợp phục vụ công tác quản lý và cải thiện chất lượng dịch vụ.',
+          'journey-dek'),
+          (
+          'Kinh nghiệm từ các mô hình tương đồng cho thấy dữ liệu, dịch vụ số và công cụ quản lý điểm đến có thể tạo ra kết quả thực tế khi được tổ chức và vận hành phù hợp. Các kết quả này không được suy rộng thành tỷ lệ tăng trưởng hoặc dự báo trực tiếp cho Thanh Hóa.',
+          'Kinh nghiệm từ các mô hình tương đồng cho thấy dữ liệu, dịch vụ số và công cụ quản lý điểm đến có thể tạo ra kết quả thực tế khi được tổ chức và vận hành phù hợp. Các trường hợp tham khảo được sử dụng để làm rõ cơ chế tạo giá trị và điều kiện vận hành; kịch bản áp dụng tại Thanh Hóa được xác định riêng trên dữ liệu, mục tiêu và điều kiện của tỉnh.',
+          'benchmark-framing'),
+          (
+          'Các chỉ tiêu lợi ích là kịch bản dự kiến. Hiệu quả kinh tế – tài chính, tỷ lệ lợi ích/chi phí, thời gian hoàn vốn và giá trị hiện tại thuần cần được xác định lại khi có đầy đủ tổng mức đầu tư, tiến độ giải ngân, chi phí vận hành và dòng lợi ích.',
+          'Các chỉ tiêu lợi ích được xây dựng theo kịch bản dự kiến. Hiệu quả kinh tế – tài chính, tỷ lệ lợi ích/chi phí, thời gian hoàn vốn và giá trị hiện tại thuần sẽ được hoàn thiện cùng phương án đầu tư khi tổng mức đầu tư, tiến độ giải ngân, chi phí vận hành và dòng lợi ích được xác định đầy đủ.',
+          'finance-author-voice'),
+          (
+          'Theo kịch bản quy mô thị trường năm 2030; không phải doanh thu hay dòng tiền của Đề án.',
+          'Theo kịch bản quy mô thị trường năm 2030; phản ánh phần tổng thu của ngành và được tách biệt với dòng tiền của Đề án.',
+          'finance-card-boundary'),
+          (
+          'Mức tăng tổng thu du lịch không phải lợi nhuận của Đề án hoặc dòng tiền hoàn vốn.',
+          'Trong tính toán hiệu quả, mức tăng tổng thu du lịch được xem là chỉ tiêu của ngành và được tách khỏi lợi nhuận hoặc dòng tiền hoàn vốn của Đề án.',
+          'finance-caution-author-voice'),
+          (
+          'Nếu các hệ thống, dữ liệu và thiết bị tiếp tục được đầu tư riêng lẻ, tỉnh sẽ phải duy trì nhiều đầu mối cập nhật, khó dùng chung dữ liệu và tăng nguy cơ trùng lặp chức năng giữa các hệ thống.',
+          'Nếu các hệ thống, dữ liệu và thiết bị tiếp tục được đầu tư riêng lẻ, việc duy trì nhiều đầu mối cập nhật sẽ làm giảm khả năng dùng chung dữ liệu và tăng nguy cơ trùng lặp chức năng giữa các hệ thống.',
+          'risk-dek-author-voice'),
+          ('Dữ liệu phân tán, phải tổng hợp và đối chiếu nhiều lần','Dữ liệu phân tán làm tăng khối lượng tổng hợp và đối chiếu','risk-1-title'),
+          ('Ba điều kiện cần bảo đảm trong quá trình triển khai','Ba điều kiện bảo đảm hiệu quả trong quá trình triển khai','guard-title'),
+          (
+          'Để các hạng mục vận hành ổn định, cần quy định rõ đầu mối quản lý dữ liệu, trách nhiệm xử lý thông tin và nguyên tắc kết nối với các nền tảng, doanh nghiệp đang hoạt động trên thị trường.',
+          'Đề án xác định ba điều kiện để các hạng mục vận hành ổn định: đầu mối quản lý dữ liệu rõ ràng, trách nhiệm xử lý thông tin cụ thể và nguyên tắc kết nối với các nền tảng, doanh nghiệp đang hoạt động trên thị trường.',
+          'guard-dek-author-voice'),
+          ('Quy định rõ đầu mối quản lý và chuẩn dữ liệu','Đầu mối quản lý và chuẩn dữ liệu được xác định rõ','guard-1-title'),
+          (
+          'Mỗi nhóm dữ liệu cần có đơn vị chịu trách nhiệm cập nhật. Điểm đến, doanh nghiệp và dịch vụ cần được định danh thống nhất để cùng một dữ liệu có thể sử dụng trên IOC, ứng dụng, bản đồ số và hệ thống quản lý doanh nghiệp.',
+          'Mỗi nhóm dữ liệu có đơn vị chịu trách nhiệm cập nhật. Điểm đến, doanh nghiệp và dịch vụ được định danh thống nhất để cùng một dữ liệu có thể sử dụng trên IOC, ứng dụng, bản đồ số và hệ thống quản lý doanh nghiệp.',
+          'guard-1-body'),
+          ('Thông tin và cảnh báo phải gắn với đơn vị chịu trách nhiệm xử lý','Thông tin và cảnh báo gắn với đơn vị chịu trách nhiệm xử lý','guard-2-title'),
+          (
+          'Đối với phản ánh của du khách, cảnh báo quá tải hoặc vi phạm chất lượng dịch vụ, cần xác định rõ đơn vị tiếp nhận, thời hạn xử lý và cách theo dõi kết quả. Thông tin trên hệ thống phải phục vụ trực tiếp cho quy trình nghiệp vụ.',
+          'Đối với phản ánh của du khách, cảnh báo quá tải hoặc vi phạm chất lượng dịch vụ, Đề án xác định rõ đơn vị tiếp nhận, thời hạn xử lý và cách theo dõi kết quả. Thông tin trên hệ thống được gắn trực tiếp với quy trình nghiệp vụ.',
+          'guard-2-body'),
+          ('Tận dụng các dịch vụ và nền tảng thị trường đã có','Kết nối với các dịch vụ và nền tảng thị trường đang hoạt động','guard-3-title'),
+          ('Không đầu tư một IOC du lịch độc lập.','Đề án không hình thành một IOC du lịch độc lập.','ioc-author-voice'),
+          (
+          'Vì vậy, cần triển khai các hạng mục của Đề án trong một hệ thống thống nhất, kế thừa hạ tầng và tài sản số hiện có, sử dụng chung dữ liệu và xác định rõ trách nhiệm vận hành.',
+          'Trên cơ sở đó, các hạng mục của Đề án được triển khai trong một hệ thống thống nhất, kế thừa hạ tầng và tài sản số hiện có, sử dụng chung dữ liệu và xác định rõ trách nhiệm vận hành.',
+          'conclusion-author-voice'),
+          (
+          'So với năm 2025, lượt khách cần tăng khoảng 32,1% nhưng tổng thu cần tăng khoảng 106,6%; vì vậy cần tăng thời gian lưu trú và mức sử dụng dịch vụ.',
+          'So với năm 2025, mục tiêu lượt khách tăng khoảng 32,1% trong khi mục tiêu tổng thu tăng khoảng 106,6%; yêu cầu tương ứng là kéo dài thời gian lưu trú và tăng mức sử dụng dịch vụ.',
+          'decision-1'),
+          ('2. Các vấn đề cần xử lý có liên quan trực tiếp với nhau','2. Các vấn đề có quan hệ trực tiếp với nhau','decision-2-title'),
+          (
+          'Các chỉ tiêu lợi ích kinh tế là kịch bản dự kiến và cần được xác định lại tại bước nghiên cứu khả thi, thẩm định kinh tế – tài chính. Kết quả của các mô hình trong và ngoài nước được sử dụng để làm rõ cơ chế tạo giá trị và điều kiện vận hành, không được suy rộng thành dự báo trực tiếp cho Thanh Hóa.',
+          'Các chỉ tiêu lợi ích kinh tế là kịch bản dự kiến và sẽ được tiếp tục hoàn thiện trong quá trình lập phương án đầu tư, trên cơ sở tổng mức đầu tư, tiến độ, chi phí vận hành và dòng lợi ích. Kết quả của các mô hình trong và ngoài nước được sử dụng để làm rõ cơ chế tạo giá trị và điều kiện vận hành; kịch bản của Thanh Hóa được xác định riêng theo dữ liệu, mục tiêu và điều kiện của tỉnh.',
+          'footer-author-voice')
+          ]
+
+          for old,new,label in replacements:
+              once(old,new,label)
+
+          # Language gate: no reviewer/meta/over-directive residue in visible proposal copy.
+          forbidden = [
+              'tỉnh cần ', 'tỉnh phải ', 'Thanh Hóa cần ', 'Thanh Hóa phải ',
+              'không được suy rộng', 'cần được xác định lại', 'phải được xác định lại',
+              'tại bước nghiên cứu khả thi, thẩm định', 'không phải KPI',
+              'KPI riêng', 'cần quy định rõ', 'phải gắn với đơn vị',
+              'Vì vậy, cần triển khai', 'Cần tổ chức các hạng mục',
+              'Các dịch vụ cần được kết nối'
+          ]
+          low = s.lower()
+          bad=[]
+          for x in forbidden:
+              if x.lower() in low:
+                  bad.append(x)
+          if bad:
+              raise SystemExit('LANGUAGE_QA_RESIDUALS: '+repr(bad))
+
+          required = [
+              'Khoảng cách giữa tốc độ tăng lượt khách và tổng thu đặt ra yêu cầu',
+              'Các hạng mục được tổ chức trên một nền tảng dùng chung',
+              'Các chỉ tiêu đầu ra được xác định ở quy mô toàn tỉnh',
+              'kịch bản áp dụng tại Thanh Hóa được xác định riêng',
+              'sẽ được hoàn thiện cùng phương án đầu tư',
+              'Đề án xác định ba điều kiện để các hạng mục vận hành ổn định',
+              'Đề án không hình thành một IOC du lịch độc lập',
+              'Trên cơ sở đó, các hạng mục của Đề án được triển khai trong một hệ thống thống nhất'
+          ]
+          for x in required:
+              if x not in s:
+                  raise SystemExit('LANGUAGE_QA_MISSING: '+x)
+
+          p.write_text(s, encoding='utf-8')
+          print('LANGUAGE_QA_PASS')
+          PY
+      - name: Commit language QA and remove one-shot workflow
+        shell: bash
+        run: |
+          git config user.name "ChatGPT Language QA"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f .github/workflows/language-qa.yml
+          git add index.html .github/workflows/language-qa.yml
+          git commit -m "Polish TH-why-short proposal-author language"
+          git push
