@@ -107,6 +107,12 @@ h1,h2,h3,h4,h5,h6,.big-quote,.decision h2,.refs h2,.section h2,.hero h1{font-fam
 .hero h1 .hero-main{display:block;max-width:900px}
 .issue h3{min-height:46px}
 @media(max-width:680px){.hero h1 .hero-pre{font-size:.5em}.issue h3{min-height:0}}
+
+/* Final content-alignment UI */
+.metric-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 2px}.metric-pair>div{padding:8px 9px;border-radius:12px;background:#f4f9fb;border:1px solid #e1edf1}.metric-pair strong{display:block;font-size:24px;line-height:1;color:var(--navy)}.metric-pair span{display:block;margin-top:5px;font-size:10.5px;line-height:1.25;color:var(--muted)}
+.outputs-section{background:linear-gradient(180deg,#eef8fa,#f7fbfc)}.outputs-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.output-kpi{background:white;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 10px 26px rgba(7,57,90,.06)}.output-kpi strong{display:block;font-size:27px;line-height:1;color:var(--navy)}.output-kpi span{display:block;margin-top:8px;font-size:11.5px;line-height:1.4;color:var(--muted)}
+@media(max-width:1050px){.outputs-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.outputs-grid{grid-template-columns:1fr}}
 </style>
 <style>
 /* V6 language QA: slightly calmer document tone */
@@ -165,9 +171,9 @@ h1,h2,h3,h4,h5,h6,.big-quote,.decision h2,.refs h2,.section h2,.hero h1{font-fam
 <div class="issue-grid">
 <article class="issue"><div class="num">01 · Thời gian lưu trú và mức chi tiêu</div><h3>Giá trị chuyến đi và thời gian lưu trú chưa tương xứng với yêu cầu tăng tổng thu</h3><div class="metric">≈ 3,15×</div><div class="desc">Trong kỳ 30/4–1/5/2024, mức chi/ngày của khách lưu trú cao xấp xỉ 3,15 lần khách tham quan trong ngày. Việc kéo dài thời gian lưu trú và tăng mức sử dụng dịch vụ có ý nghĩa trực tiếp đối với mục tiêu tăng tổng thu.</div><div class="need">Cần tăng thời gian lưu trú và mức sử dụng dịch vụ</div></article>
 <article class="issue"><div class="num">02 · Mùa vụ và phân bố khách</div><h3>Khách còn tập trung vào du lịch biển và mùa cao điểm</h3><div class="metric">68,7%</div><div class="desc">Năm 2025, du lịch biển chiếm khoảng 68,7% lượt khách toàn tỉnh. Theo số liệu lũy kế công bố, phần lớn lượt khách và tổng thu tập trung trong quý II và quý III.</div><div class="need">Cần tăng kết nối giữa biển, di sản, sinh thái, cộng đồng và đô thị</div></article>
-<article class="issue"><div class="num">03 · Khai thác tài nguyên du lịch</div><h3>Tài nguyên phong phú nhưng sản phẩm và trải nghiệm chưa tương xứng</h3><div class="metric">858 + ~700</div><div class="desc">Thanh Hóa có 858 di tích được xếp hạng và gần 700 sản phẩm OCOP. Tuy nhiên, tại nhiều điểm du lịch việc giới thiệu, trưng bày, bán sản phẩm và tổ chức trải nghiệm còn hạn chế.</div><div class="need">Cần gắn tài nguyên với nội dung, sản phẩm, trải nghiệm và dịch vụ</div></article>
+<article class="issue"><div class="num">03 · Khai thác tài nguyên du lịch</div><h3>Tài nguyên phong phú nhưng sản phẩm và trải nghiệm chưa tương xứng</h3><div class="metric-pair"><div><strong>858</strong><span>di tích được xếp hạng</span></div><div><strong>~700</strong><span>sản phẩm OCOP</span></div></div><div class="desc">Thanh Hóa có 858 di tích được xếp hạng và gần 700 sản phẩm OCOP. Tuy nhiên, tại nhiều điểm du lịch việc giới thiệu, trưng bày, bán sản phẩm và tổ chức trải nghiệm còn hạn chế.</div><div class="need">Cần gắn tài nguyên với nội dung, sản phẩm, trải nghiệm và dịch vụ</div></article>
 <article class="issue"><div class="num">04 · Doanh nghiệp và hộ kinh doanh</div><h3>Nguồn cung dịch vụ phân tán, mức độ ứng dụng số chưa đồng đều</h3><div class="metric">1.450</div><div class="desc">Năm 2025, toàn tỉnh có khoảng 1.450 cơ sở lưu trú với trên 50.500 phòng. Một bộ phận doanh nghiệp nhỏ và hộ kinh doanh còn gặp khó khăn về chi phí đầu tư, nhân lực và kỹ năng số.</div><div class="need">Cần chuẩn hóa thông tin cơ sở cung cấp dịch vụ và tạo điều kiện tham gia thuận tiện</div></article>
-<article class="issue"><div class="num">05 · Dữ liệu và nền tảng số</div><h3>Hạ tầng và nền tảng số đã có nhưng dữ liệu cần tiếp tục chuẩn hóa, kết nối</h3><div class="metric">IOC + 71</div><div class="desc">Thanh Hóa đã vận hành IOC, số hóa 71 khu, điểm du lịch và triển khai Smart Travel/AR tại 9 điểm. Chỉ thị số 10/CT-UBND năm 2026 tiếp tục yêu cầu làm sạch, chuẩn hóa và kết nối dữ liệu văn hóa, du lịch.</div><div class="need">Cần tiếp tục làm sạch, chuẩn hóa, kết nối và khai thác dữ liệu dùng chung</div></article>
+<article class="issue"><div class="num">05 · Dữ liệu và nền tảng số</div><h3>Hạ tầng và nền tảng số đã có nhưng dữ liệu cần tiếp tục chuẩn hóa, kết nối</h3><div class="metric-pair"><div><strong>IOC</strong><span>đã vận hành</span></div><div><strong>71</strong><span>khu, điểm đã số hóa</span></div></div><div class="desc">Thanh Hóa đã vận hành IOC, số hóa 71 khu, điểm du lịch và triển khai Smart Travel/AR tại 9 điểm. Chỉ thị số 10/CT-UBND năm 2026 tiếp tục yêu cầu làm sạch, chuẩn hóa và kết nối dữ liệu văn hóa, du lịch.</div><div class="need">Cần tiếp tục làm sạch, chuẩn hóa, kết nối và khai thác dữ liệu dùng chung</div></article>
 <article class="issue"><div class="num">06 · Chất lượng dịch vụ và phản ánh</div><h3>Chất lượng dịch vụ chưa đồng đều, việc tiếp nhận và xử lý phản ánh cần chặt chẽ hơn</h3><div class="metric">07/CT‑UBND</div><div class="desc">Các văn bản và thông tin kiểm tra của tỉnh vẫn ghi nhận tình trạng chất lượng dịch vụ chưa đồng đều, vi phạm về giá, nài ép khách và trông giữ xe. Phản ánh của du khách cần được chuyển đến đúng đơn vị có trách nhiệm để xử lý và theo dõi kết quả.</div><div class="need">Cần liên thông tiếp nhận phản ánh, xử lý vi phạm và giám sát chất lượng</div></article>
 </div>
 </div>
@@ -218,6 +224,20 @@ h1,h2,h3,h4,h5,h6,.big-quote,.decision h2,.refs h2,.section h2,.hero h1{font-fam
 </div>
 </div>
 </section>
+<section class="section outputs-section">
+<div class="wrap">
+<div class="head"><div class="section-no">Đầu ra đến năm 2030</div><div><h2>Những năng lực và mức bao phủ dự kiến sau đầu tư</h2><p class="dek">Các chỉ tiêu đầu ra được xác định ở quy mô toàn tỉnh và phản ánh năng lực mà bảy hạng mục cùng hình thành, không phải KPI riêng của một hạng mục nếu chức năng có tính liên thông.</p></div></div>
+<div class="outputs-grid">
+<div class="output-kpi"><strong>08</strong><span>khu, điểm du lịch trọng điểm được đầu tư hạ tầng số theo phương án đầu tư</span></div>
+<div class="output-kpi"><strong>≥10</strong><span>khu, điểm kết nối dữ liệu và giám sát với IOC du lịch</span></div>
+<div class="output-kpi"><strong>100%</strong><span>dữ liệu tài nguyên du lịch được số hóa theo phạm vi Đề án đến năm 2030</span></div>
+<div class="output-kpi"><strong>≥20</strong><span>sản phẩm trải nghiệm số di sản, sinh thái, văn hóa</span></div>
+<div class="output-kpi"><strong>1.200–1.500</strong><span>doanh nghiệp, cơ sở lưu trú và hộ kinh doanh tham gia hệ sinh thái số</span></div>
+<div class="output-kpi"><strong>2,5–3,0 triệu</strong><span>người dùng Ứng dụng Thanh Hóa Smart Tourism vào năm 2030</span></div>
+<div class="output-kpi"><strong>&gt;90%</strong><span>cơ sở kinh doanh dịch vụ du lịch tham gia nền tảng; mức hài lòng của du khách mục tiêu trên 90%</span></div>
+</div>
+</div>
+</section>
 <section class="section white">
 <div class="wrap">
 <div class="head"><div class="section-no">07 · Hành trình phục vụ du khách</div><div><h2>Các dịch vụ cần được kết nối trong toàn bộ chuyến đi</h2><p class="dek">Từ khâu tìm kiếm thông tin, xây dựng hành trình, đặt dịch vụ, tham quan đến thanh toán và phản ánh, du khách cần được tiếp cận thông tin và dịch vụ thống nhất. Dữ liệu phát sinh trong quá trình sử dụng được tổng hợp phục vụ công tác quản lý và cải thiện chất lượng dịch vụ.</p></div></div>
@@ -254,11 +274,11 @@ h1,h2,h3,h4,h5,h6,.big-quote,.decision h2,.refs h2,.section h2,.hero h1{font-fam
 <div class="scenarios">
 <div class="sc"><div class="label">Tăng chi tiêu bình quân</div><div class="val">+3–5%</div><p>Kịch bản tăng chi tiêu bình quân/lượt khách</p></div>
 <div class="sc"><div class="label">Kéo dài lưu trú</div><div class="val">+0,2 ngày</div><p>Kịch bản kéo dài thời gian lưu trú</p></div>
-<div class="sc"><div class="label">Doanh thu du lịch tăng thêm</div><div class="val">1.800–3.000 tỷ/năm</div><p>Kịch bản doanh thu du lịch tăng thêm</p></div>
-<div class="sc"><div class="label">Lợi ích định lượng ước tính</div><div class="val">500–800 tỷ/năm</div><p>Giai đoạn 2028–2030</p></div>
-<div class="sc"><div class="label">Thu ngân sách tăng thêm</div><div class="val">90–210 tỷ/năm</div><p>Kịch bản thu ngân sách tăng thêm</p></div>
+<div class="sc"><div class="label">Mức tăng tổng thu du lịch dự kiến</div><div class="val">1.800–3.000 tỷ/năm</div><p>Theo kịch bản quy mô thị trường năm 2030; không phải doanh thu hay dòng tiền của Đề án.</p></div>
+<div class="sc"><div class="label">Lợi ích kinh tế có thể lượng hóa</div><div class="val">500–800 tỷ/năm</div><p>Phần đóng góp tăng thêm vào giá trị gia tăng ngành trong giai đoạn 2028–2030; chưa gồm hiệu ứng lan tỏa.</p></div>
+<div class="sc"><div class="label">Thu ngân sách tăng thêm</div><div class="val">90–210 tỷ/năm</div><p>Từ năm 2030, theo giả định tỷ lệ động viên ngân sách khoảng 5–7% tổng thu.</p></div>
 <div class="sc sc-split"><div class="label">Hai nhóm lợi ích chi phí được tính riêng</div><div class="split-metrics"><div><strong>15–25 tỷ/năm</strong><span>Tiết kiệm chi phí quản lý, xúc tiến</span></div><div><strong>20–30 tỷ/năm</strong><span>Giảm chi phí tuân thủ, bán hàng</span></div></div></div>
-<div class="caution"><b>Các kịch bản không được cộng cơ học:</b> Doanh thu du lịch tăng thêm 1.800–3.000 tỷ đồng/năm và lớp lợi ích định lượng 500–800 tỷ đồng/năm phản ánh các nhóm giá trị khác nhau và không cộng trực tiếp nếu chưa chứng minh phạm vi lợi ích là độc lập, không trùng lặp. B/C &gt; 2 và thời gian hoàn vốn kinh tế 4–5 năm là kịch bản sơ bộ, cần được xác định lại khi có đầy đủ dữ liệu đầu vào.</div>
+<div class="caution"><b>Các nhóm lợi ích được tính riêng:</b> Mức tăng tổng thu du lịch 1.800–3.000 tỷ đồng/năm phản ánh phần tổng thu của ngành có thể tăng theo kịch bản phát triển du lịch; lợi ích kinh tế có thể lượng hóa 500–800 tỷ đồng/năm là lớp giá trị dùng riêng cho tính toán hiệu quả tổng hợp. Hai nhóm không cộng trực tiếp để tránh trùng lặp. Mức tăng tổng thu du lịch không phải lợi nhuận của Đề án hoặc dòng tiền hoàn vốn. B/C &gt; 2 và thời gian hoàn vốn kinh tế 4–5 năm là kịch bản sơ bộ và sẽ được hoàn thiện khi đủ dữ liệu chi phí, tiến độ và dòng lợi ích.</div>
 </div>
 </div>
 </div>
